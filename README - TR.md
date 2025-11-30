@@ -5,9 +5,9 @@ Platform, tam otonom bir görev icra eder: önceden planlanmış bir rotada uça
 
 Bu depo, projenin arkasındaki **sistem mimarisini, edge AI hattını ve entegrasyon çalışmalarını** belgelemek için hazırlanmıştır.
 
-🎥 **Promotional Video:** [Watch on YouTube](https://youtu.be/MoKNS4MnHKc?si=5vaya1-DzLdw4j8K)
+🎥 **Project Overview Video 1:** [Watch on YouTube](https://youtu.be/MoKNS4MnHKc?si=5vaya1-DzLdw4j8K)
 
-🎥 **Promotional Video2:** [Watch on YouTube](https://youtu.be/0MTjb65SmeQ?si=WlFSHK1B2cfJrwUZ)
+🎥 **Project Overview Video 2:** [Watch on YouTube](https://youtu.be/0MTjb65SmeQ?si=WlFSHK1B2cfJrwUZ)
 
 ---
 
