@@ -5,9 +5,9 @@ The platform performs fully autonomous missions: it flies a pre-planned route, d
 
 This repository documents the **system architecture, edge AI pipeline, and integration work** behind the project.
 
-🎥 **Promotional Video1:** [Watch on YouTube](https://youtu.be/MoKNS4MnHKc?si=5vaya1-DzLdw4j8K)
+🎥 **Project Overview Video1:** [Watch on YouTube](https://youtu.be/MoKNS4MnHKc?si=5vaya1-DzLdw4j8K)
 
-🎥 **Promotional Video2:** [Watch on YouTube](https://youtu.be/0MTjb65SmeQ?si=WlFSHK1B2cfJrwUZ)
+🎥 **Project Overview Video2:** [Watch on YouTube](https://youtu.be/0MTjb65SmeQ?si=WlFSHK1B2cfJrwUZ)
 
 ---
 
