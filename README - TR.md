@@ -34,7 +34,7 @@ Bu projenin hedefi, aşağıdaki kabiliyetlere sahip **otonom bir kargo dağıt�
 - Misina’yı tekrar topladıktan sonra bir sonraki hedefe devam etmesi,
 - Tüm teslimatlar tamamlandığında eve (home konumuna) otonom olarak dönüp iniş yapması.
 
-Bu süreçte tüm algılama ve karar verme adımları, havadayken **NVIDIA Jetson Orin** üzerinde çalışan, **Raspberry Pi High Quality Camera** ve **YOLOv8** tabanlı bir model kullanılarak **tamamen yerleşik (onboard)** yürütülmektedir. Uçuş kontrolcüsü olarak **Pixhawk Cube Orange** kullanılmakta, görev planlama, telemetri takibi ve güvenlik denetimi için yer kontrol istasyonu tarafında **Mission Planner** devreye girmektedir.
+Bu süreçte tüm algılama ve karar verme adımları, havadayken **NVIDIA Jetson Nano** üzerinde çalışan, **Raspberry Pi High Quality Camera** ve **YOLOv8** tabanlı bir model kullanılarak **tamamen yerleşik (onboard)** yürütülmektedir. Uçuş kontrolcüsü olarak **Pixhawk Cube Orange** kullanılmakta, görev planlama, telemetri takibi ve güvenlik denetimi için yer kontrol istasyonu tarafında **Mission Planner** devreye girmektedir.
 
 ---
 
@@ -53,7 +53,7 @@ Sistem yüksek seviyede aşağıdaki bileşenlerden oluşur:
   - Telemetri verilerini (konum, attitude, hız, durum bilgileri) hem Jetson’a hem de yer kontrol istasyonuna sağlar.
 
 - **Yerleşik Hesaplama Birimi ve Kamera**
-  - Yerleşik bilgisayar: **NVIDIA Jetson Orin**.
+  - Yerleşik bilgisayar: **NVIDIA Jetson Nano**.
   - Görüntü sensörü: **Raspberry Pi High Quality Camera**, genellikle aşağı bakan konfigürasyonda.
   - Jetson, kameradan gelen akışı alır, gerçek zamanlı nesne tespiti yapar ve kargo bırakma kararlarını uçuş kontrolcüsü ile koordine eder.
 
@@ -77,7 +77,7 @@ Sistem yüksek seviyede aşağıdaki bileşenlerden oluşur:
 
 **Donanım**
 
-- **Yerleşik Hesaplama Birimi:** NVIDIA Jetson Orin (Linux tabanlı edge AI platformu).
+- **Yerleşik Hesaplama Birimi:** NVIDIA Jetson Nano (Linux tabanlı edge AI platformu).
 - **Uçuş Kontrolcüsü:** Pixhawk Cube Orange (Cube sınıfı otopilot).
 - **Kamera:** Raspberry Pi High Quality Camera.
 - **Kargo Mekanizması:** Motorlu vinç + misina (monofilament) ile su şişesi gibi yüklerin indirilmesi ve geri toplanması.
@@ -90,7 +90,7 @@ Sistem yüksek seviyede aşağıdaki bileşenlerden oluşur:
 - **Otopilot Yazılımı:** ArduPilot/PX4 (otonom multirotor uçuşu ve payload kontrolü için konfigüre edilmiştir).
 - **Yer Kontrol İstasyonu:** Görev yükleme, telemetri ve parametre ayarları için Mission Planner.
 - **Bilgisayarlı Görü:** Yerdeki işaretleyicilerin gerçek zamanlı tespiti için YOLOv8 (Ultralytics).
-- **Donanım Hızlandırma:** Jetson Orin üzerinde CUDA tabanlı GPU hızlandırmalı çıkarım.
+- **Donanım Hızlandırma:** Jetson Nano üzerinde CUDA tabanlı GPU hızlandırmalı çıkarım.
 - **Haritalama:** Uçuş sırasında çekilen görüntülerden harita/ortofoto üretmek için OpenDroneMap (ODM).
 - **Veri Transferi:** İniş sonrası üretilen harita çıktılarının Jetson’dan yer istasyonuna aktarımı için FTP.
 - **Diller ve Araçlar:** Algılama ve görev mantığı ağırlıklı olarak Python; başlatma otomasyonu için shell script’ler / systemd servisleri.
@@ -99,7 +99,7 @@ Sistem yüksek seviyede aşağıdaki bileşenlerden oluşur:
 
 ## 5. Algılama ve Edge AI Hattı
 
-Algılama hattı, uçuş sırasında tamamen Jetson Orin üzerinde çalışır:
+Algılama hattı, uçuş sırasında tamamen Jetson Nano üzerinde çalışır:
 
 1. **Veri Toplama ve Model Eğitimi**
    - Ekip, yerde boyanmış alfasayısal işaretleyicileri (harfler ve rakamlar) içeren bir veri kümesi hazırlamıştır.
@@ -107,7 +107,7 @@ Algılama hattı, uçuş sırasında tamamen Jetson Orin üzerinde çalışır:
    - Bu veri kümesi kullanılarak, ilgili işaretleyicileri tespit edecek şekilde özelleştirilmiş bir **YOLOv8** modeli eğitilmiştir.
 
 2. **Yerleşik Çıkarım (Inference)**
-   - Jetson Orin, Raspberry Pi HQ Camera’dan gelen kareleri yakalar.
+   - Jetson Nano, Raspberry Pi HQ Camera’dan gelen kareleri yakalar.
    - YOLOv8 modeli, Jetson GPU’su üzerinde **CUDA** kullanılarak gerçek zamanlı olarak çalıştırılır; böylece İHA’nın hareketine yetişecek hızda tespit yapılabilir.
    - Çıktılarda, tespit edilen nesnelerin bounding box’ları, sınıf etiketleri (harf/rakam) ve güven skorları yer alır.
 
@@ -218,7 +218,7 @@ Kargo görevini icra etmenin ötesinde, sistem uçtan uca bir veri işleme hatt�
 
 Bu proje, aşağıdaki alanlarda somut yetkinlikleri ortaya koymaktadır:
 
-- Özelleştirilmiş bir **YOLOv8** modelinin **NVIDIA Jetson Orin** üzerinde gerçek zamanlı olarak sahada çalıştırılması,
+- Özelleştirilmiş bir **YOLOv8** modelinin **NVIDIA Jetson Nano** üzerinde gerçek zamanlı olarak sahada çalıştırılması,
 - Edge AI algılama hattının **Cube sınıfı bir uçuş kontrolcüsü** (Pixhawk Cube Orange) ile kapalı döngü karar verme için entegre edilmesi,
 - Yüksek seviyeli olayların (işaretleyici tespiti) uçuş davranışına (durma/bekleme, göreve devam) ve aktüatör kontrolüne (kargo vinç motoru) bağlandığı bir **görev mantığı katmanı** tasarımı ve implementasyonu,
 - Bir İHA yarışmasının getirdiği **kısıtlar ve güvenlik gereksinimleri** altında sistem tasarımı ve test süreci,
@@ -235,7 +235,7 @@ Bu projeye olan katkılarım özetle şunlardır:
 
 - **Edge AI ve Algılama**
   - Alfasayısal işaretleyiciler için özel veri kümesinin hazırlanması sürecine yöneticilik yaptım.
-  - YOLOv8 modelinin eğitimi ve Jetson Orin üzerinde devreye alınması (deployment) süreçlerini yönettim.
+  - YOLOv8 modelinin eğitimi ve Jetson Nano üzerinde devreye alınması (deployment) süreçlerini yönettim.
   - Kamera akışından tespit çıktısına giden gerçek zamanlı çıkarım hattını (pipeline) geliştirdim.
 
 - **Edge AI performans kazanımı ve Model Optimizasyonu**
