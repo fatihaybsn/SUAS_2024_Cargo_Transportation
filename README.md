@@ -34,7 +34,7 @@ The goal of this project was to build an **autonomous cargo delivery UAV** that 
 - Retract the line and continue to the next delivery,
 - Return to the home location and land autonomously after all deliveries are completed.
 
-All perception and decision-making for payload delivery runs **onboard** on an **NVIDIA Jetson Orin**, using a **Raspberry Pi High Quality Camera** and a **YOLOv8** model trained on custom data. The flight controller is a **Pixhawk Cube Orange**, integrated with a ground control station (Mission Planner) for mission planning, telemetry monitoring, and safety supervision.
+All perception and decision-making for payload delivery runs **onboard** on an **NVIDIA Jetson Nano**, using a **Raspberry Pi High Quality Camera** and a **YOLOv8** model trained on custom data. The flight controller is a **Pixhawk Cube Orange**, integrated with a ground control station (Mission Planner) for mission planning, telemetry monitoring, and safety supervision.
 
 ---
 
@@ -53,7 +53,7 @@ At a high level, the system consists of the following components:
   - Provides telemetry data (position, attitude, velocity, status) to the Jetson and the ground control station.
 
 - **Onboard Compute & Camera**
-  - **NVIDIA Jetson Orin** as the onboard computer.
+  - **NVIDIA Jetson Nano** as the onboard computer.
   - **Raspberry Pi High Quality Camera** mounted on the UAV, providing a downward-looking video stream.
   - The Jetson captures the camera feed, runs object detection in real time, and coordinates payload drop decisions with the flight controller.
 
@@ -77,7 +77,7 @@ At a high level, the system consists of the following components:
 
 **Hardware**
 
-- **Onboard Compute:** NVIDIA Jetson Orin (Linux-based edge AI platform).
+- **Onboard Compute:** NVIDIA Jetson Nano (Linux-based edge AI platform).
 - **Flight Controller:** Pixhawk Cube Orange (Cube-class autopilot).
 - **Camera:** Raspberry Pi High Quality Camera.
 - **Payload Mechanism:** Motorized winch with monofilament (fishing line) for lowering/retracting water bottle payloads.
@@ -90,7 +90,7 @@ At a high level, the system consists of the following components:
 - **Autopilot Firmware:** ArduPilot/PX4 (configured for autonomous multirotor flight and payload control).
 - **Ground Control Station:** Mission Planner for mission upload, telemetry monitoring, and parameter configuration.
 - **Computer Vision:** YOLOv8 (Ultralytics) for real-time object detection of ground markers.
-- **Acceleration:** CUDA on Jetson Orin for GPU-accelerated inference.
+- **Acceleration:** CUDA on Jetson Nano for GPU-accelerated inference.
 - **Mapping:** OpenDroneMap (ODM) for generating maps/orthophotos from in-flight images.
 - **Data Transfer:** FTP for transferring processed map outputs from the Jetson to the ground control station.
 - **Languages & Tools:** Primarily Python (for perception and mission logic), shell scripts/systemd services for startup automation.
@@ -99,7 +99,7 @@ At a high level, the system consists of the following components:
 
 ## 5. Perception & Edge AI Pipeline
 
-The perception pipeline runs entirely on the Jetson Orin during flight:
+The perception pipeline runs entirely on the Jetson Nano during flight:
 
 1. **Data Collection & Model Training**
    - The team prepared a dataset of alphanumeric markers (letters and digits) painted on the ground.
@@ -107,7 +107,7 @@ The perception pipeline runs entirely on the Jetson Orin during flight:
    - A **YOLOv8** model was trained on this custom dataset to detect the markers that correspond to valid drop locations.
 
 2. **Onboard Inference**
-   - The Jetson Orin captures frames from the Raspberry Pi HQ Camera.
+   - The Jetson Nano captures frames from the Raspberry Pi HQ Camera.
    - The YOLOv8 model runs on the Jetson GPU using **CUDA**, providing real-time detections that can keep up with the UAV’s motion.
    - Detection outputs include bounding boxes, class labels (letter or digit), and confidence scores.
 
@@ -217,7 +217,7 @@ Beyond executing the cargo mission, the system also implements an end-to-end dat
 
 This project demonstrates the ability to:
 
-- Deploy a **custom-trained YOLOv8 model** on an **NVIDIA Jetson Orin** and run it in real time during flight.
+- Deploy a **custom-trained YOLOv8 model** on an **NVIDIA Jetson Nano** and run it in real time during flight.
 - Integrate edge AI perception with a **Cube-class flight controller** (Pixhawk Cube Orange) for closed-loop decision making.
 - Design and implement a **mission logic layer** that links high-level events (marker detection) to flight behaviors (hold/loiter, resume mission) and actuator control (payload motor).
 - Work within the **constraints and safety requirements** of a UAV competition environment.
@@ -234,7 +234,7 @@ My contributions to this project are summarized as follows:
 
 - **Edge AI and Detection**
 - I led the preparation of the custom dataset for alphanumeric markers.
-- I managed the training and deployment of the YOLOv8 model on Jetson Orin.
+- I managed the training and deployment of the YOLOv8 model on Jetson Nano.
 - I developed the real-time inference pipeline from camera stream to detection output.
 
 - **Edge AI performance gain and Model Optimization**
